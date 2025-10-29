@@ -1,0 +1,54 @@
+[
+  {
+    "name": "Inflight Summary",
+    "class": "inflight-tab-identifier",
+    "tabType": "Inflight Summary",
+    "viewId": "inflight-summary",
+    "default": true,
+    "toolBarFlag": true,
+    "modulePageId": 1,
+    "divDetails": {
+      "divClass": "",
+      "divId": "inflight-summary-div"
+    }
+  },
+  {
+    "name": "Inflight Projects",
+    "class": "inflight-tab-identifier",
+    "tabType": "Inflight Projects",
+    "viewId": "inflight-projects",
+    "default": false,
+    "toolBarFlag": true,
+    "modulePageId": 2,
+    "divDetails": {
+      "divClass": "",
+      "divId": "inflight-projects-div"
+    }
+  },
+  {
+    "name": "Completed Projects",
+    "class": "inflight-tab-identifier",
+    "tabType": "Completed Projects",
+    "viewId": "completed-projects",
+    "default": false,
+    "toolBarFlag": true,
+    "modulePageId": 3,
+    "divDetails": {
+      "divClass": "",
+      "divId": "completed-projects-div"
+    }
+  },
+  {
+    "name": "Map",
+    "class": "inflight-tab-identifier",
+    "tabType": "Map",
+    "viewId": "map",
+    "default": false,
+    "toolBarFlag": true,
+    "modulePageId": 3,
+    "divDetails": {
+      "divClass": "",
+      "divId": "map-div"
+    }
+  }
+]

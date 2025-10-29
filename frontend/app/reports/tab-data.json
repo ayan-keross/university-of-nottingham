@@ -1,0 +1,28 @@
+[
+  {
+    "name": "Summary-Dashboard",
+    "class": "reports-tab-identifier",
+    "tabType": "Summary-Dashboard",
+    "viewId": "summary-dashboard",
+    "default": true,
+    "toolBarFlag": true,
+    "modulePageId": 1,
+    "divDetails": {
+      "divClass": "",
+      "divId": "summary-dashboard-div"
+    }
+  },
+  {
+    "name": "Asset-Replacement-Programme",
+    "class": "reports-tab-identifier",
+    "tabType": "Asset-Replacement-Programme",
+    "viewId": "asset-replacement-programme",
+    "default": false,
+    "toolBarFlag": true,
+    "modulePageId": 2,
+    "divDetails": {
+      "divClass": "",
+      "divId": "asset-replacement-programme-div"
+    }
+  }
+]

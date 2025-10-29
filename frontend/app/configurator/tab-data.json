@@ -1,0 +1,132 @@
+[
+  {
+    "name": "Committee Decision",
+    "class": "configurator-common-class committeeDecision-tab-identifier",
+    "tabType": "Committee Decision",
+    "viewId": "committeeDecision",
+    "default": false,
+    "toolBarFlag": true,
+    "modulePageId": 1,
+    "divDetails": {
+      "divclass": "configurator-common-class ",
+      "divId": "committeeDecision-div"
+    }
+  },
+  {
+    "name": "Asset Type",
+    "class": "configurator-common-class assetType-tab-identifier",
+    "tabType": "Asset Type",
+    "viewId": "assetType",
+    "default": false,
+    "toolBarFlag": true,
+    "modulePageId": 2,
+    "divDetails": {
+      "divclass": "configurator-common-class ",
+      "divId": "assetType-div"
+    }
+  },
+  {
+    "name": "Primary Performance Outcome",
+    "class": "configurator-common-class primaryPerformanceOutcome-tab-identifier",
+    "tabType": "Primary Performance Outcome",
+    "viewId": "primaryPerformanceOutcome",
+    "default": false,
+    "toolBarFlag": true,
+    "modulePageId": 2,
+    "divDetails": {
+      "divclass": "configurator-common-class ",
+      "divId": "primaryPerformanceOutcome-div"
+    }
+  },
+  {
+    "name": "E&F Parent Programme",
+    "class": "configurator-common-class EFParentProgramme-tab-identifier",
+    "tabType": "E&F Parent Programme",
+    "viewId": "EFParentProgramme",
+    "default": false,
+    "toolBarFlag": true,
+    "modulePageId": 2,
+    "divDetails": {
+      "divclass": "configurator-common-class ",
+      "divId": "EFParentProgramme-div"
+    }
+  },
+  {
+    "name": "Investment Category",
+    "class": "configurator-common-class investmentCategory-tab-identifier",
+    "tabType": "Investment Category",
+    "viewId": "investmentCategory",
+    "default": false,
+    "toolBarFlag": true,
+    "modulePageId": 2,
+    "divDetails": {
+      "divclass": "configurator-common-class ",
+      "divId": "investmentCategory-div"
+    }
+  },
+  {
+    "name": "Scope of Request",
+    "class": "configurator-common-class scopeofRequest-tab-identifier",
+    "tabType": "Scope of Request",
+    "viewId": "scopeofRequest",
+    "default": false,
+    "toolBarFlag": true,
+    "modulePageId": 2,
+    "divDetails": {
+      "divclass": "configurator-common-class ",
+      "divId": "scopeofRequest-div"
+    }
+  },
+  {
+    "name": "Carbon Impact Score 1&2",
+    "class": "configurator-common-class carbonImpactScore-tab-identifier",
+    "tabType": "Carbon Impact Score",
+    "viewId": "carbonImpactScore",
+    "default": false,
+    "toolBarFlag": true,
+    "modulePageId": 3,
+    "divDetails": {
+      "divclass": "configurator-common-class ",
+      "divId": "carbonImpactScore-div"
+    }
+  },
+  {
+    "name": "Name of Sponsor",
+    "class": "configurator-common-class nameofSponsor-tab-identifier",
+    "tabType": "Name of Sponsor",
+    "viewId": "nameofSponsor",
+    "default": false,
+    "toolBarFlag": true,
+    "modulePageId": 4,
+    "divDetails": {
+      "divclass": "configurator-common-class ",
+      "divId": "nameofSponsor-div"
+    }
+  },
+  {
+    "name": "PMO Triage routing",
+    "class": "configurator-common-class pmoTriageRouting-tab-identifier",
+    "tabType": "PMO Triage routing",
+    "viewId": "pmoTriageRouting",
+    "default": false,
+    "toolBarFlag": true,
+    "modulePageId": 5,
+    "divDetails": {
+      "divclass": "configurator-common-class ",
+      "divId": "pmoTriageRouting-div"
+    }
+  },
+  {
+    "name": "Impact on AccessAble Profile",
+    "class": "configurator-common-class impactAccessAbleProfile-tab-identifier",
+    "tabType": "Impact on AccessAble Profile",
+    "viewId": "impactAccessAbleProfile",
+    "default": false,
+    "toolBarFlag": true,
+    "modulePageId": 6,
+    "divDetails": {
+      "divclass": "configurator-common-class ",
+      "divId": "impactAccessAbleProfile-div"
+    }
+  }
+]

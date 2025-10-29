@@ -1,0 +1,41 @@
+[
+  {
+    "name": "Demand",
+    "class": "strategic-tab-identifier",
+    "tabType": "Demand",
+    "viewId": "demand",
+    "default": true,
+    "toolBarFlag": true,
+    "modulePageId": 1,
+    "divDetails": {
+      "divClass": "",
+      "divId": "demand-div"
+    }
+  },
+  {
+    "name": "Pipeline",
+    "class": "strategic-tab-identifier",
+    "tabType": "Pipeline",
+    "viewId": "pipeline",
+    "default": false,
+    "toolBarFlag": true,
+    "modulePageId": 2,
+    "divDetails": {
+      "divClass": "",
+      "divId": "pipeline-div"
+    }
+  },
+  {
+    "name": "Director's Approval",
+    "class": "strategic-tab-identifier",
+    "tabType": "Director's Approval",
+    "viewId": "director-approval",
+    "default": false,
+    "toolBarFlag": true,
+    "modulePageId": 3,
+    "divDetails": {
+      "divClass": "",
+      "divId": "director-approval-div"
+    }
+  }
+]

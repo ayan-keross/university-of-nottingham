@@ -1,0 +1,80 @@
+[
+  {
+    "name": "Dashboard",
+    "class": "cost-tab-identifier",
+    "tabType": "Cost-Budget Dashboard",
+    "viewId": "dashboard",
+    "default": true,
+    "toolBarFlag": true,
+    "modulePageId": 1,
+    "divDetails": {
+      "divClass": "",
+      "divId": "dashboard-div"
+    }
+  },
+  {
+    "name": "Cost Worksheet",
+    "class": "cost-tab-identifier",
+    "tabType": "Cost Worksheet",
+    "viewId": "costworksheet",
+    "default": true,
+    "toolBarFlag": true,
+    "modulePageId": 1,
+    "divDetails": {
+      "divClass": "",
+      "divId": "costworksheet-div"
+    }
+  },
+  {
+    "name": "Funding",
+    "class": "cost-tab-identifier",
+    "tabType": "Funding",
+    "viewId": "funding",
+    "default": true,
+    "toolBarFlag": true,
+    "modulePageId": 1,
+    "divDetails": {
+      "divClass": "",
+      "divId": "funding-div"
+    }
+  },
+  {
+    "name": "Cashflow Forecast",
+    "class": "cost-tab-identifier",
+    "tabType": "Cashflow-Forecast",
+    "viewId": "cashflow-forecast",
+    "default": true,
+    "toolBarFlag": true,
+    "modulePageId": 1,
+    "divDetails": {
+      "divClass": "",
+      "divId": "cashflow-forecast-div"
+    }
+  },
+  {
+    "name": "Actuals",
+    "class": "cost-tab-identifier",
+    "tabType": "Actuals",
+    "viewId": "actuals",
+    "default": true,
+    "toolBarFlag": true,
+    "modulePageId": 1,
+    "divDetails": {
+      "divClass": "",
+      "divId": "actuals-div"
+    }
+  },
+  {
+    "name": "Purchase Orders",
+    "class": "cost-tab-identifier",
+    "tabType": "Purchase-Orders",
+    "viewId": "purchase-orders",
+    "default": true,
+    "toolBarFlag": true,
+    "modulePageId": 1,
+    "divDetails": {
+      "divClass": "",
+      "divId": "purchase-orders-div"
+    }
+  }
+]

@@ -1,0 +1,28 @@
+[
+  {
+    "name": "Dashboard",
+    "class": "schedule-tab-identifier",
+    "tabType": "Dashboard",
+    "viewId": "schedule-dashboard",
+    "default": true,
+    "toolBarFlag": true,
+    "modulePageId": 1,
+    "divDetails": {
+      "divClass": "",
+      "divId": "schedule-dashboard-div"
+    }
+  },
+  {
+    "name": "Gantt Chart",
+    "class": "schedule-tab-identifier",
+    "tabType": "Gantt Chart",
+    "viewId": "gantt-chart",
+    "default": false,
+    "toolBarFlag": true,
+    "modulePageId": 2,
+    "divDetails": {
+      "divClass": "",
+      "divId": "gantt-chart-div"
+    }
+  }
+]
