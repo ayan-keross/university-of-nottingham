@@ -21,7 +21,7 @@ export const dashboardConfig = [
     type: "bubbleChart",
     title: "Projects by Priority Score",
     width: "1/1",
-    height: "lg",
+    height: "md",
     api: "/api/dashboard/priority-score"
   },
   {
@@ -37,7 +37,7 @@ export const dashboardConfig = [
       default: "performance"
     },
     width: "1/1",
-    height: "lg",
+    height: "xlg",
     api: "/api/dashboard/projects-per"
   }
 ];

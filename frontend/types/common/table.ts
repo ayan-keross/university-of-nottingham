@@ -3,7 +3,7 @@ import { JSX } from "react";
 export interface Column<T> {
   key: keyof T;
   label: string;
-  type: "text" | "number" | "date" | "boolean";
+  type: "text" | "number" | "date" | "boolean" | "custom";
   sortable?: boolean;
   editable?: boolean;
   width?: number | string;

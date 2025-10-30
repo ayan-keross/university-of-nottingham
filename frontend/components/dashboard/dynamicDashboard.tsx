@@ -1,7 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
 import { Card } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 import { widgetMap } from "@/app/strategic-planning/demand/config/widgetMap";
 
@@ -31,7 +30,8 @@ export default function DynamicDashboard({ config } ) {
   const heightClasses = {
     sm: "h-48",
     md: "h-72",
-    lg: "h-96",
+    lg: "h-82",
+    xlg: "h-92",
   };
 
   return (
@@ -46,7 +46,7 @@ export default function DynamicDashboard({ config } ) {
         return (
           <Card
             key={widget.id}
-            className={`${widthClasses[widget.width]} ${heightClasses[widget.height]} p-4 flex flex-col`}
+            className={`${widthClasses[widget.width]} ${heightClasses[widget.height]} p-4 mr-3 flex flex-col`}
           >
             <div className="flex items-center justify-between mb-3">
               <h2 className="font-bold text-lg">{widget.title}</h2>

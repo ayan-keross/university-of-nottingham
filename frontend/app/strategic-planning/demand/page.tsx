@@ -10,6 +10,7 @@ import { DynamicToggleGroup } from "@/components/common/dynamicToggleGroup";
 import TableSummaryToggle from "@/components/common/tableSummaryToggle";
 import DynamicDashboard from "@/components/dashboard/dynamicDashboard";
 import { dashboardConfig } from "./config/dashBoardConfig";
+import { Badge } from "@/components/ui/badge";
 
 export type DemandProject = {
   projectId: string;
@@ -30,6 +31,24 @@ const columns: Column<DemandProject>[] = [
   { key: "requestedDate", label: "Date Request Received", type: "date" },
   { key: "fundingSource", label: "Funding Source", type: "text" },
   {
+    key: "projectStatus",
+    label: "Project Status",
+    type: "custom",
+    render: (value) => {
+      const statusColors: { [key: string]: string } = {
+        active: "bg-green-100 text-green-800",
+        archive: "bg-gray-100 text-gray-800",
+      };
+      const classes =
+        statusColors[String(value)] || "bg-gray-100 text-gray-800";
+      return (
+        <Badge className={`${classes} px-2 py-1 rounded-full text-sm`}>
+          {String(value).charAt(0).toUpperCase() + String(value).slice(1)}
+        </Badge>
+      );
+    },
+  },
+  {
     key: "estimatedGrossBudget",
     label: "Estimated Gross Budget",
     type: "number",
@@ -39,21 +58,26 @@ export default function DemandPage() {
   const [data, setData] = useState<DemandProject[]>([]);
   const [filteredData, setFilteredData] = useState<DemandProject[]>([]);
   const [view, setView] = useState("table");
-  const toggleOptions = [{ label: 'Active', value: 'active' }, { label: 'Archive', value: 'archive' }];
+  const toggleOptions = [
+    { label: "Active", value: "active" },
+    { label: "Archive", value: "archive" },
+  ];
 
   const handleToggle = (val: string | string[]) => {
     console.log("Toggled value:", val);
     // Implement filtering logic based on toggled value
-    if (val === 'active') {
-      setFilteredData(data.filter(project => project.projectStatus == val));
-    } else if (val === 'archive') {
-      setFilteredData(data.filter(project => project.projectStatus == val));
+    if (val === "active") {
+      setFilteredData(data.filter((project) => project.projectStatus == val));
+    } else if (val === "archive") {
+      setFilteredData(data.filter((project) => project.projectStatus == val));
     }
-  }
+  };
   const fetchData = async () => {
     const projects = await getDemandProjects();
     setData(projects);
-    setFilteredData(projects.filter(project => project.projectStatus == 'active'));
+    setFilteredData(
+      projects.filter((project) => project.projectStatus == "active")
+    );
   };
   useEffect(() => {
     // Simulate data fetching
@@ -75,7 +99,11 @@ export default function DemandPage() {
 
             {/* Right actions */}
             <div className="flex items-center gap-2">
-              <DynamicToggleGroup options = {toggleOptions} value="active" onToggle={handleToggle} />
+              <DynamicToggleGroup
+                options={toggleOptions}
+                value="active"
+                onToggle={handleToggle}
+              />
               <TableSummaryToggle onChange={setView} />
               <DemandForm onSuccess={fetchData} />
             </div>
@@ -88,7 +116,6 @@ export default function DemandPage() {
           ) : (
             <DynamicDashboard config={dashboardConfig} />
           )}
-          
         </TabsContent>
       </div>
     </div>
