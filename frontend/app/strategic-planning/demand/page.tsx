@@ -8,7 +8,7 @@ import DemandForm from "./demandForm";
 import { getDemandProjects } from "@/utils/api/demandProjectApi";
 import { DynamicToggleGroup } from "@/components/common/dynamicToggleGroup";
 import TableSummaryToggle from "@/components/common/tableSummaryToggle";
-import DynamicDashboard from "@/components/common/dynamicDashboard";
+import DynamicDashboard from "@/components/dashboard/dynamicDashboard";
 import { dashboardConfig } from "./config/dashBoardConfig";
 
 export type DemandProject = {

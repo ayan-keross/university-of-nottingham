@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 import { widgetMap } from "@/app/strategic-planning/demand/config/widgetMap";
 
-export default function DynamicDashboard({ config }) {
+export default function DynamicDashboard({ config } ) {
   const [widgetState, setWidgetState] = useState({});
 
   useEffect(() => {

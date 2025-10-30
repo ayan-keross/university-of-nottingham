@@ -1,5 +1,5 @@
 export const dashboardConfig = [
-  {
+  /*{
     id: "phased-cost",
     type: "barChart",
     title: "Phased Cost",
@@ -15,12 +15,12 @@ export const dashboardConfig = [
     width: "1/2",
     height: "lg",
     api: "/api/dashboard/phased-cost"
-  },
+  },*/
   {
     id: "priority-score",
     type: "bubbleChart",
     title: "Projects by Priority Score",
-    width: "1/2",
+    width: "1/1",
     height: "lg",
     api: "/api/dashboard/priority-score"
   },
