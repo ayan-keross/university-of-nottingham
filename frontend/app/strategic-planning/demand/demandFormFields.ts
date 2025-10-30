@@ -25,7 +25,7 @@ const demandFormFields: FormTabConfig[] = [
         placeholder: "Enter Old Project ID",
       },
       {
-        name: "dateRequestReceived",
+        name: "requestedDate",
         label: "Date Request Received",
         type: "date",
         //colSpan: 3,
@@ -45,7 +45,7 @@ const demandFormFields: FormTabConfig[] = [
         placeholder: "Enter Funding Source",
       },
       {
-        name: "assetName",
+        name: "assetIdentifier",
         label: "Asset Name",
         type: "select",
         colSpan: 2,

@@ -12,18 +12,24 @@ import DynamicVerticalTabbedForm from "@/components/common/dynamicVerticalTabbed
 import demandFormFields from "./demandFormFields";
 import { getAssets } from "@/utils/api/assetApi";
 import { updateFormFieldGeneric } from "@/utils/formUtil";
+import { getConfigurators } from "@/utils/api/configuratorApi";
+import { createDemandProject } from "@/utils/api/demandProjectApi";
 
-function DemandForm() {
+function DemandForm({onSuccess}: { onSuccess: () => void }) {
   const [demandFormFieldArr, setDemandFormFieldArr] = useState(demandFormFields);
   const [assets, setAssets] = useState([]);
+  const [configurators, setConfigurators] = useState({});
   const [open, setOpen] = useState(false);
   const [form, setForm] = useState({});
   const [loading, setLoading] = useState(true);
+
   const handleSubmit = (data) => {
     // Handle form submission logic here
     console.log("Form submitted:", data);
+    createDemandProject(data);
     setOpen(false);
     setForm({}); // Reset form
+    onSuccess();
   };
 
   const fetchAssetData = async () => {
@@ -36,11 +42,22 @@ function DemandForm() {
       setLoading(false);
     }
   };
+
+  const fetchConfiguratorData = async (configType: string) => {
+    try {
+      const result = await getConfigurators(configType);
+      setConfigurators(prev => ({ ...prev, [configType]: result }) );
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    } finally {
+      setLoading(false);
+    }  };
+  
   useEffect(() => {
     // Fetch asset data on component mount
     fetchAssetData();
 
-    updateFormFieldGeneric(setDemandFormFieldArr, "general", "assetName", {
+    updateFormFieldGeneric(setDemandFormFieldArr, "general", "assetIdentifier", {
       options: assets?.map((asset) => ({
         label: asset.assetName,
         value: asset.assetIdentifier,

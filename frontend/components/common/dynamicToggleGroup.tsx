@@ -21,11 +21,16 @@ export function DynamicToggleGroup({
   value,
   onToggle,
 }: DynamicToggleGroupProps) {
+  const [toggledValue, setToggledValue] = React.useState<string | string[]>(value);
   return (
     <ToggleGroup
       type={type}
-      value={value}
-      onValueChange={onToggle}
+      value={toggledValue}
+      onValueChange={(val)=>{
+        if(!val) return;
+        setToggledValue(val);
+        onToggle(val)
+      }}
       className="gap-0.5"
     >
       {options.map((opt) => (
