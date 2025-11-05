@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.ikon.uon.model.DemandProject;
 import com.ikon.uon.service.DemandProjectService;
+import com.ikon.uon.service.workflow.DemandPipelineService;
 
 @RestController
 @RequestMapping("/api/v1/demand-projects")
@@ -25,10 +26,14 @@ public class DemandProjectController {
     @Autowired
     DemandProjectService demandProjectService;
 
+    @Autowired
+    DemandPipelineService demandPipelineService;
+
     // fetch all demand projects
-    @GetMapping("/")
+    @GetMapping({"","/"})
     public List<DemandProject> getDemandProjects(@RequestParam(required = false) String status) {
         if (status != null) {
+            // status - active/archive
             return demandProjectService.getDemandProjectsByStatus(status);
         } else {
             return demandProjectService.getAllDemandProjects();
@@ -58,22 +63,29 @@ public class DemandProjectController {
         return demandProjectService.updateDemandProject(projectIdentifier, demandProjectData);
     }
 
-    // mark projectstatus archive
+    // mark status archive
     @PatchMapping("/{projectIdentifier}/deactivate")
     public DemandProject deactivateDemandProject(
             @PathVariable String projectIdentifier) {
 
         return demandProjectService.updateDemandProject(projectIdentifier,
-                Map.of("projectStatus", "archive"));
+                Map.of("status", "archive"));
     }
 
-    // mark projectstatus active
+    // mark status active
     @PatchMapping("/{projectIdentifier}/activate")
     public DemandProject activateDemandProject(
             @PathVariable String projectIdentifier) {
 
         return demandProjectService.updateDemandProject(projectIdentifier,
-                Map.of("projectStatus", "active"));
+                Map.of("status", "active"));
     }
 
+    // send demand project to pipeline
+    // mark projectStatus pipeline
+    @PatchMapping("/{projectIdentifier}/send-to-pipeline")
+    public DemandProject sendToPipeline(
+            @PathVariable String projectIdentifier) {
+        return demandPipelineService.sendToPipeline(projectIdentifier);
+    }
 }

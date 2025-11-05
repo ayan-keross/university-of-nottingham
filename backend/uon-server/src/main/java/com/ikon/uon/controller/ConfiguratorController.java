@@ -23,7 +23,7 @@ public class ConfiguratorController {
     @Autowired
     ConfiguratorService configuratorService;
 
-    @GetMapping("/")
+    @GetMapping({"","/"})
     public List<Configurator> getAllConfigurators(){
         return configuratorService.getAllConfigurators();
     }

@@ -37,10 +37,11 @@ public class DemandProjectService {
     }
 
     public List<DemandProject> getDemandProjectsByStatus(String projectStatus) {
-        List<DemandProject> allProjects = demandProjectRepository.findAll();
-        return allProjects.stream()
-                .filter(project -> projectStatus.equals(project.getProjectStatus()))
-                .toList();
+        // List<DemandProject> allProjects = demandProjectRepository.findAll();
+        // return allProjects.stream()
+        //         .filter(project -> projectStatus.equals(project.getProjectStatus()))
+        //         .toList();
+        return demandProjectRepository.findByStatus(projectStatus);
     }
 
     public DemandProject createDemandProject(Map<String, Object> demandProjectData) {
@@ -50,7 +51,8 @@ public class DemandProjectService {
         demandProject.setProjectId("DP-" + System.currentTimeMillis());
         demandProject.setCreatedAt(LocalDateTime.now());
         demandProject.setUpdatedAt(LocalDateTime.now());
-        demandProject.setProjectStatus("active");
+        demandProject.setStatus("active");
+        demandProject.setProjectStatus("demand");
         demandProject.setCreatedBy("System");
         demandProject.setUpdatedBy("System");
 

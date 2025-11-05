@@ -22,7 +22,7 @@ public class AssetController {
     @Autowired
     AssetService assetService;
 
-    @GetMapping("/")
+    @GetMapping({"","/"})
     public List<Asset> getAllAssets() {
         return assetService.getAllAssets();
     }

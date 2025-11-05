@@ -11,6 +11,7 @@ import TableSummaryToggle from "@/components/common/tableSummaryToggle";
 import DynamicDashboard from "@/components/dashboard/dynamicDashboard";
 import { dashboardConfig } from "./config/dashBoardConfig";
 import { Badge } from "@/components/ui/badge";
+import { ColumnFieldConfig } from "@/types/common/form";
 
 export type DemandProject = {
   projectId: string;
@@ -23,7 +24,7 @@ export type DemandProject = {
   requestedDate: Date;
   projectStatus: string;
 };
-const columns: Column<DemandProject>[] = [
+const columns: ColumnFieldConfig<DemandProject>[] = [
   { key: "projectId", label: "Project ID", type: "text" },
   { key: "projectName", label: "Project Name", type: "text" },
   { key: "oldProjectId", label: "Old Project ID", type: "text" },
@@ -56,6 +57,7 @@ const columns: Column<DemandProject>[] = [
 ];
 export default function DemandPage() {
   const [data, setData] = useState<DemandProject[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
   const [filteredData, setFilteredData] = useState<DemandProject[]>([]);
   const [view, setView] = useState("table");
   const toggleOptions = [
@@ -78,6 +80,7 @@ export default function DemandPage() {
     setFilteredData(
       projects.filter((project) => project.projectStatus == "active")
     );
+    setLoading(false);
   };
   useEffect(() => {
     // Simulate data fetching
@@ -111,7 +114,12 @@ export default function DemandPage() {
           </div>
 
           {/* Table or Summary */}
-          {view === "table" ? (
+          {loading ? (
+            <div className="mt-10">
+              Loading.......
+            </div>
+            
+          ) : view == "table" ? (
             <TableComponent columns={columns || []} data={filteredData} />
           ) : (
             <DynamicDashboard config={dashboardConfig} />
