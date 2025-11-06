@@ -5,14 +5,17 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ikon.uon.service.PipelineProjectService;
+import com.ikon.uon.model.DemandProject;
 import com.ikon.uon.model.PipelineProject;
 
 @RestController
@@ -30,7 +33,7 @@ public class PipelineProjectController {
         }
     }
 
-    @GetMapping("/{projectIdentifiier}")
+    @GetMapping("/{projectIdentifier}")
     public PipelineProject getPipelineProjectByProjectIdentifier(@PathVariable String projectIdentifier){
         return pipelineProjectService.getPipelineProjectByProjectIdentifier(projectIdentifier);
     }
@@ -38,5 +41,36 @@ public class PipelineProjectController {
     @PostMapping("/")
     public PipelineProject createPipelineProject(@RequestBody Map<String,Object> pipelineProject){
         return pipelineProjectService.createPipelineProject(pipelineProject,false);
+    }
+
+    @PutMapping("/{projectIdentifier}")
+    public PipelineProject updatePipelineProject(@PathVariable String projectIdentifier,@RequestBody Map<String,Object> pipelineProjectData){
+        return pipelineProjectService.updatePipelineProject(projectIdentifier, pipelineProjectData);
+    }
+
+    // mark status archive
+    @PatchMapping("/{projectIdentifier}/deactivate")
+    public PipelineProject deactivatePipelineProject(
+            @PathVariable String projectIdentifier) {
+
+        return pipelineProjectService.updatePipelineProject(projectIdentifier,
+                Map.of("status", "archive"));
+    }
+
+    // mark status active
+    @PatchMapping("/{projectIdentifier}/activate")
+    public PipelineProject activatePipelineProject(
+            @PathVariable String projectIdentifier) {
+
+        return pipelineProjectService.updatePipelineProject(projectIdentifier,
+                Map.of("status", "active"));
+    }
+
+    // send pipeline project to director-approval
+    // mark projectStatus directorApproval
+    @PatchMapping("/{projectIdentifier}/send-to-director-approval")
+    public PipelineProject sendToDirectorApproval(
+            @PathVariable String projectIdentifier) {
+        return pipelineProjectService.sendToDirectorApproval(projectIdentifier);
     }
 }

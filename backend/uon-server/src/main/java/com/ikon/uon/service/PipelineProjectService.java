@@ -8,6 +8,8 @@ import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.ikon.uon.exception.ResourceNotFoundException;
+import com.ikon.uon.model.DemandProject;
 import com.ikon.uon.model.PipelineProject;
 import com.ikon.uon.repository.PipelineProjectRepository;
 
@@ -49,4 +51,52 @@ public class PipelineProjectService {
 
     }
 
+    public PipelineProject updatePipelineProject(String projectIdentifier, Map<String, Object> pipelineProjectData) {
+        PipelineProject existingProject = pipelineProjectRepository.findByProjectIdentifier(projectIdentifier);
+        if (existingProject == null) {
+            return null;
+        }
+
+        Map<String, Object> existingData = objectMapper.convertValue(existingProject,Map.class);
+        existingData.putAll(pipelineProjectData);
+        PipelineProject updatedProject = objectMapper.convertValue(existingData, PipelineProject.class);
+
+        updatedProject.setUpdatedAt(LocalDateTime.now());
+        updatedProject.setUpdatedBy("System");
+
+        return pipelineProjectRepository.save(updatedProject);
+    }
+
+    public PipelineProject sendToDirectorApproval(String projectIdentifier){
+        PipelineProject existingProject = pipelineProjectRepository.findByProjectIdentifier(projectIdentifier);
+        if (existingProject == null) {
+            throw new ResourceNotFoundException("Pipeline project not found: " + projectIdentifier);
+        }
+
+        if ("directorApproval".equalsIgnoreCase(existingProject.getProjectStatus())) {
+            throw new IllegalStateException("Project already in director-approval");
+        }
+
+        existingProject.setProjectStatus("directorApproval");
+        existingProject.setUpdatedAt(LocalDateTime.now());
+        existingProject.setUpdatedBy("System");
+        return pipelineProjectRepository.save(existingProject);
+
+    }
+
+    public PipelineProject sendToInflight(String projectIdentifier){
+        PipelineProject existingProject = pipelineProjectRepository.findByProjectIdentifier(projectIdentifier);
+        if (existingProject == null) {
+            throw new ResourceNotFoundException("Director Approval project not found: " + projectIdentifier);
+        }
+
+        if ("inflight".equalsIgnoreCase(existingProject.getProjectStatus())) {
+            throw new IllegalStateException("Project already in inflight");
+        }
+
+        existingProject.setProjectStatus("inflight");
+        existingProject.setUpdatedAt(LocalDateTime.now());
+        existingProject.setUpdatedBy("System");
+        return pipelineProjectRepository.save(existingProject);
+    }
 }

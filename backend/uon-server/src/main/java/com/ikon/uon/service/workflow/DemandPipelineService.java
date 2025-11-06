@@ -25,7 +25,7 @@ public class DemandPipelineService {
     @Autowired
     private ObjectMapper objectMapper;
 
-    // @Transactional
+    @Transactional
     public DemandProject sendToPipeline(String projectIdentifier) {
 
         DemandProject existing = demandProjectService.getDemandProjectByProjectIdentifier(projectIdentifier);
@@ -44,6 +44,9 @@ public class DemandPipelineService {
         if (pipeline == null) {
             throw new IllegalStateException("Pipeline project creation failed");
         }
+        // if(true){
+        //     throw new IllegalStateException("dummy error");
+        // }
 
         return demandProjectService.updateDemandProject(
                 projectIdentifier, Map.of("projectStatus", "pipeline"));
