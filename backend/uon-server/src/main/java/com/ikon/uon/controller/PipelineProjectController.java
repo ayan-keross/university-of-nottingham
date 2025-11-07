@@ -48,6 +48,16 @@ public class PipelineProjectController {
         return pipelineProjectService.updatePipelineProject(projectIdentifier, pipelineProjectData);
     }
 
+    @PatchMapping("/{projectIdentifier}/assign-project-managers")
+    public PipelineProject assignProjectManagers(@PathVariable String projectIdentifier,@RequestBody List<String> projectManagerList){
+        return pipelineProjectService.assignProjectManagers(projectIdentifier,projectManagerList);
+    }
+
+    @PatchMapping("/{projectIdentifier}/assign-business-partners")
+    public PipelineProject assignBusinessPartners(@PathVariable String projectIdentifier,@RequestBody List<String> businessPartnerList){
+        return pipelineProjectService.assignBusinessPartners(projectIdentifier,businessPartnerList);
+    }
+
     // mark status archive
     @PatchMapping("/{projectIdentifier}/deactivate")
     public PipelineProject deactivatePipelineProject(

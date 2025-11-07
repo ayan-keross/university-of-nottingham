@@ -66,6 +66,27 @@ public class PipelineProjectService {
 
         return pipelineProjectRepository.save(updatedProject);
     }
+    public PipelineProject assignProjectManagers(String projectIdentifier, List<String> projectManagerList){
+        PipelineProject existingProject = pipelineProjectRepository.findByProjectIdentifier(projectIdentifier);
+        if(existingProject == null){
+            throw new ResourceNotFoundException("Pipeline project not found: "+ projectIdentifier);
+        }
+        existingProject.setProjectManagerList(projectManagerList);
+        existingProject.setUpdatedBy("System");
+        existingProject.setUpdatedAt(LocalDateTime.now());
+        return pipelineProjectRepository.save(existingProject);
+    }
+
+    public PipelineProject assignBusinessPartners(String projectIdentifier, List<String> businessPartnerList){
+        PipelineProject existingProject = pipelineProjectRepository.findByProjectIdentifier(projectIdentifier);
+        if(existingProject == null){
+            throw new ResourceNotFoundException("Pipeline project not found: "+ projectIdentifier);
+        }
+        existingProject.setBusinessPartnerList(businessPartnerList);
+        existingProject.setUpdatedBy("System");
+        existingProject.setUpdatedAt(LocalDateTime.now());
+        return pipelineProjectRepository.save(existingProject);
+    }
 
     public PipelineProject sendToDirectorApproval(String projectIdentifier){
         PipelineProject existingProject = pipelineProjectRepository.findByProjectIdentifier(projectIdentifier);
