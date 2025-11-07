@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ikon.uon.exception.ResourceNotFoundException;
-import com.ikon.uon.model.DemandProject;
 import com.ikon.uon.model.PipelineProject;
 import com.ikon.uon.repository.PipelineProjectRepository;
 
@@ -102,7 +101,20 @@ public class PipelineProjectService {
         existingProject.setUpdatedAt(LocalDateTime.now());
         existingProject.setUpdatedBy("System");
         return pipelineProjectRepository.save(existingProject);
+    }
 
+    public PipelineProject sendBackToPipeline(String projectIdentifier){
+        PipelineProject existingProject = pipelineProjectRepository.findByProjectIdentifier(projectIdentifier);
+        if(existingProject == null){
+            throw new ResourceNotFoundException("Pipeline project not found :"+ projectIdentifier);
+        }
+        if ("pipeline".equalsIgnoreCase(existingProject.getProjectStatus())) {
+            throw new IllegalStateException("Project already in pipeline");
+        }
+        existingProject.setProjectStatus("pipeline");
+        existingProject.setUpdatedBy("System");
+        existingProject.setUpdatedAt(LocalDateTime.now());
+        return pipelineProjectRepository.save(existingProject);
     }
 
     public PipelineProject sendToInflight(String projectIdentifier){

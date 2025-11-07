@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ikon.uon.service.PipelineProjectService;
-import com.ikon.uon.model.DemandProject;
 import com.ikon.uon.model.PipelineProject;
 
 @RestController
@@ -82,5 +81,13 @@ public class PipelineProjectController {
     public PipelineProject sendToDirectorApproval(
             @PathVariable String projectIdentifier) {
         return pipelineProjectService.sendToDirectorApproval(projectIdentifier);
+    }
+
+    // send directorApproval project to pipeline
+    // mark projectStatus pipeline
+    @PatchMapping("/{projectIdentifier}/send-back-to-pipeline")
+    public PipelineProject sendBackToPipeline(
+            @PathVariable String projectIdentifier) {
+        return pipelineProjectService.sendBackToPipeline(projectIdentifier);
     }
 }
