@@ -27,3 +27,12 @@ export const updateDemandProject = async (projectIdentifier: string, demandProje
     if (!res.ok) throw new Error("Failed to update demand project");
     return res.json();
 };
+
+export const sendToPipeline = async (projectIdentifier: string) => {
+  const res = await fetch(`${BASE_URL}/demand-projects/${projectIdentifier}/send-to-pipeline`, {
+    method: "PATCH",
+    headers: { "Content-Type": "application/json" },
+  });
+    if (!res.ok) throw new Error("Failed to send demand project to pipeline");
+    return res.json();
+}

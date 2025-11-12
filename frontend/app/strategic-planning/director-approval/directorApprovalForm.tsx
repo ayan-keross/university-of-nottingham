@@ -1,0 +1,90 @@
+import { useEffect, useState } from "react";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
+import DynamicVerticalTabbedForm from "@/components/common/dynamicVerticalTabbedForm";
+import directorApprovalFormFields from "./directorApprovalFormFields";
+import { getAssets } from "@/utils/api/assetApi";
+import { updateFormFieldGeneric } from "@/utils/formUtil";
+import { getConfigurators } from "@/utils/api/configuratorApi";
+import { createDemandProject } from "@/utils/api/demandProjectApi";
+
+function DirectorApprovalForm({onSuccess}: { onSuccess: () => void }) {
+  const [directorApprovalFormFieldArr, setDirectorApprovalFormFieldArr] = useState(directorApprovalFormFields);
+  const [assets, setAssets] = useState([]);
+  const [configurators, setConfigurators] = useState({});
+  const [open, setOpen] = useState(false);
+  const [form, setForm] = useState({});
+  const [loading, setLoading] = useState(true);
+
+  const handleSubmit = (data) => {
+    // Handle form submission logic here
+    console.log("Form submitted:", data);
+    createDemandProject(data);
+    setOpen(false);
+    setForm({}); // Reset form
+    onSuccess();
+  };
+
+  const fetchAssetData = async () => {
+    try {
+      const result = await getAssets();
+      setAssets(result);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const fetchConfiguratorData = async (configType: string) => {
+    try {
+      const result = await getConfigurators(configType);
+      setConfigurators(prev => ({ ...prev, [configType]: result }) );
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    } finally {
+      setLoading(false);
+    }  };
+  
+  useEffect(() => {
+    // Fetch asset data on component mount
+    fetchAssetData();
+
+    updateFormFieldGeneric(setDirectorApprovalFormFieldArr, "general", "assetIdentifier", {
+      options: assets?.map((asset) => ({
+        label: asset.assetName,
+        value: asset.assetIdentifier,
+      })),
+    });
+  }, [assets.length]);
+
+  return (
+    <>
+      <Dialog open={open} onOpenChange={setOpen}>
+        {/* <DialogTrigger asChild>
+          <Button variant="outline">+ Add</Button>
+        </DialogTrigger> */}
+        <DialogContent className="sm:max-w-[700px] md:max-w-[900px] lg:max-w-[1000px]">
+          <DialogHeader>
+            <DialogTitle>Director Approval Form</DialogTitle>
+            <DialogDescription>Fill in the details</DialogDescription>
+          </DialogHeader>
+
+          <DynamicVerticalTabbedForm
+            tabs={directorApprovalFormFieldArr}
+            onSubmit={(data) => handleSubmit(data)}
+            onCancel={() => console.log("Cancelled")}
+            columns={2}
+          />
+        </DialogContent>
+      </Dialog>
+    </>
+  );
+}
+
+export default DirectorApprovalForm;

@@ -43,7 +43,7 @@ export interface ColumnFieldConfig<T> {
    key: string;
   label: string;
   type: FieldType;
-  render?: (value: unknown, row: T) => React.ReactNode; 
+  render?: (value: unknown, row?: T) => React.ReactNode;
 }
 
 export interface RowDataConfig {

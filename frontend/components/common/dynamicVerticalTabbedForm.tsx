@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -36,6 +36,10 @@ interface DynamicTabbedFormProps {
   onSubmit?: (data: Record<string, string | number>) => void;
   onCancel?: () => void;
   columns?: number;
+  /** Prefill existing data (edit mode) */
+  defaultValues?: Record<string, any>;
+  /** Disable all or some fields by name */
+  disabledFields?: string[];
 }
 
 export default function DynamicVerticalTabbedForm({
@@ -43,8 +47,17 @@ export default function DynamicVerticalTabbedForm({
   onSubmit,
   onCancel,
   columns = 2,
+  defaultValues = {},
+  disabledFields = [],
 }: DynamicTabbedFormProps) {
-  const [form, setForm] = useState<Record<string, string | number>>({});
+  const [form, setForm] = useState<Record<string, string | number>>(defaultValues);
+
+  // 🧠 Prefill data when `defaultValues` changes
+  useEffect(() => {
+    if (defaultValues) {
+      setForm(defaultValues);
+    }
+  }, [defaultValues]);
 
   const handleChange = (name: string, value: string | number) => {
     setForm((prev) => ({ ...prev, [name]: value }));
@@ -55,6 +68,9 @@ export default function DynamicVerticalTabbedForm({
   };
 
   const renderField = (field: FieldConfig) => {
+    const isDisabled =
+      field.disabled || disabledFields.includes(field.name);
+
     switch (field.type) {
       case "textarea":
         return (
@@ -62,6 +78,7 @@ export default function DynamicVerticalTabbedForm({
             placeholder={field.placeholder}
             value={form[field.name] ?? ""}
             onChange={(e) => handleChange(field.name, e.target.value)}
+            disabled={isDisabled}
           />
         );
       case "select":
@@ -71,6 +88,7 @@ export default function DynamicVerticalTabbedForm({
               form[field.name] !== undefined ? String(form[field.name]) : ""
             }
             onValueChange={(val) => handleChange(field.name, val)}
+            disabled={isDisabled}
           >
             <SelectTrigger className="w-full">
               <SelectValue placeholder={`Select ${field.label}`} />
@@ -106,7 +124,7 @@ export default function DynamicVerticalTabbedForm({
             placeholder={field.placeholder}
             value={form[field.name] ?? ""}
             onChange={(e) => handleChange(field.name, e.target.value)}
-            disabled={field.disabled}
+            disabled={isDisabled}
           />
         );
     }
