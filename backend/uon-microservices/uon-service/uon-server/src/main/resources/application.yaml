@@ -1,0 +1,68 @@
+spring:
+  application:
+    name: uon-server
+  cloud:
+    gateway:
+      globalcors:
+        add-to-simple-url-handler-mapping: true
+        cors-configurations:
+          '[/**]':
+            allowedOrigins: "http://localhost:3000"
+            allowedMethods:
+              - GET
+              - POST
+              - PUT
+              - PATCH
+              - DELETE
+              - OPTIONS
+            allowedHeaders: "*"
+            allowCredentials: true
+
+  datasource:
+    url: jdbc:mysql://localhost:3306/uon?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
+    username: root
+    password: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        "[format_sql]": true
+
+  data:
+    mongodb:
+      uri: mongodb+srv://ayan_keross:Ayan%40keross@cluster0.uium94o.mongodb.net/uon?retryWrites=true&w=majority&appName=Cluster0
+  
+  kafka:
+    bootstrap-servers: localhost:9092
+
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+      properties:
+        spring.json.add.type.headers: false   # Prevents Kafka header bloat
+
+    consumer:
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      properties:
+        spring.json.trusted.packages: "*"     # Allow JSON conversion
+      group-id: uon-server
+      auto-offset-reset: latest
+
+    listener:
+      ack-mode: record   # safer processing
+      missing-topics-fatal: false
+
+eureka:
+  client:
+    register-with-eureka: true      # Registers this service with Eureka server
+    fetch-registry: true            # Fetches other service details from Eureka
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+  instance:
+    prefer-ip-address: true         # Registers with IP instead of hostname
+    lease-renewal-interval-in-seconds: 30
+    lease-expiration-duration-in-seconds: 90

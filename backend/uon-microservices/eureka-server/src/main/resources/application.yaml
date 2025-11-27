@@ -1,0 +1,40 @@
+server:
+  port: 8761
+
+spring:
+  application:
+    name: eureka-server
+
+eureka:
+  client:
+    register-with-eureka: false   # server does not register itself
+    fetch-registry: false         # server does not fetch registry
+  server:
+    enable-self-preservation: false  # disable self-preservation for dev/testing
+    eviction-interval-timer-in-ms: 5000  # run cleanup every 5 seconds
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"        # expose all actuator endpoints in dev
+  endpoint:
+    health:
+      show-details: always
+      
+  metrics:
+    enable:
+      all: true
+    tags:
+      application: ${spring.application.name}
+
+  prometheus:
+    metrics:
+      export:
+        enabled: true
+
+  health:
+    diskspace:
+      enabled: true
+    ping:
+      enabled: true
